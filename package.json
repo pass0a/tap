@@ -8,7 +8,7 @@
 		"nyc": "passoa node_modules/nyc/bin/nyc.js",
 		"instrument": "nyc -e .js instrument ./lib ./dist",
 		"pretest": "tsc -p . && npm run instrument",
-		"test": "passoa node_modules/tape/bin/tape dist/test/*.test.js",
+		"test": "tape dist/test/*.test.js",
 		"posttest": "nyc --exclude-after-remap report --reporter=text --reporter=html"
 	},
 	"author": "losper",

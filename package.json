@@ -8,7 +8,7 @@
 		"nyc": "passoa node_modules/nyc/bin/nyc.js",
 		"instrument": "nyc -e .js instrument ./lib ./dist",
 		"pretest": "tsc -p . && npm run instrument",
-		"test": "tape dist/test/*.test.js",
+		"test": "tape dist/test/*.test.js | tap-xunit",
 		"posttest": "nyc --exclude-after-remap report --reporter=text --reporter=html"
 	},
 	"author": "losper",
@@ -23,16 +23,22 @@
 		"tape": "^4.11.0"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
 		"@types/mkdirp": "^0.5.2",
 		"@types/node": "^12.0.10",
 		"@types/tape": "^4.2.33",
-		"@babel/core": "^7.4.5",
-		"@babel/preset-env": "^7.4.5",
+		"tap-xunit": "^2.4.1",
 		"typescript": "^3.5.2"
 	},
 	"nyc": {
-		"extension": [ ".ts", ".js" ],
-		"exclude": [ "**/*.d.ts" ]
+		"extension": [
+			".ts",
+			".js"
+		],
+		"exclude": [
+			"**/*.d.ts"
+		]
 	},
 	"bin": {
 		"@passoa/tap": "./bin/tap.js"

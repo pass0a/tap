@@ -1,0 +1,8 @@
+.nyc_output
+coverage
+dist
+src
+test
+tsconfig.json
+tslint.json
+update.bat

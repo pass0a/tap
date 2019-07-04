@@ -7,7 +7,7 @@
 	"scripts": {
 		"nyc_out": "rimraf .nyc_output && mkdirp .nyc_output",
 		"pretest": "npm run nyc_out && nyc instrument test dist/test && nyc instrument src dist/src && tsc",
-		"test": "tape dist/test/*.test.js",
+		"test": "tape dist/test/*.test.js | tap-xunit > dist/TEST-tap.xml",
 		"posttest": "nyc report --reporter=text --reporter=html && ncp dist/src/index.js index.js"
 	},
 	"author": "losper",
@@ -27,6 +27,7 @@
 		"@types/tape": "^4.2.33",
 		"ncp": "^2.0.0",
 		"rimraf": "^2.6.3",
+		"tap-xunit": "^2.4.1",
 		"typescript": "^3.5.2"
 	},
 	"nyc": {

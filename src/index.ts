@@ -1,6 +1,5 @@
 import * as test from 'tape';
 import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
 
 declare global {
 	namespace NodeJS {
@@ -11,8 +10,11 @@ declare global {
 }
 
 test.onFinish(function() {
-	fs.writeFile('.nyc_output/coverage.json', JSON.stringify(global['__coverage__']), function(err) {
-		console.log('write err:', err);
+	var val = JSON.stringify(global['__coverage__']);
+	fs.writeFile('.nyc_output/coverage.json', val ? val : '', function(err) {
+		if (err) {
+			console.log('write err:', err);
+		}
 	});
 });
 export { test };

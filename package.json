@@ -2,14 +2,13 @@
 	"name": "@passoa/tap",
 	"version": "1.0.2",
 	"description": "",
-	"main": "lib/src/index.js",
+	"main": "index.js",
 	"repository": "git+https://github.com/pass0a/tap.git",
 	"scripts": {
-		"nyc": "passoa node_modules/nyc/bin/nyc.js",
-		"instrument": "nyc -e .js instrument ./lib ./dist",
-		"pretest": "tsc -p . && npm run instrument",
-		"test": "tape dist/test/*.test.js | tap-xunit",
-		"posttest": "nyc --exclude-after-remap report --reporter=text --reporter=html"
+		"nyc_out": "rimraf .nyc_output && mkdirp .nyc_output",
+		"pretest": "npm run nyc_out && nyc instrument test dist/test && nyc instrument src dist/src && tsc",
+		"test": "tape dist/test/*.test.js",
+		"posttest": "nyc report --reporter=text --reporter=html && ncp dist/src/index.js index.js"
 	},
 	"author": "losper",
 	"license": "MIT",
@@ -23,22 +22,16 @@
 		"tape": "^4.11.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.4.5",
-		"@babel/preset-env": "^7.4.5",
 		"@types/mkdirp": "^0.5.2",
 		"@types/node": "^12.0.10",
 		"@types/tape": "^4.2.33",
-		"tap-xunit": "^2.4.1",
+		"ncp": "^2.0.0",
+		"rimraf": "^2.6.3",
 		"typescript": "^3.5.2"
 	},
 	"nyc": {
-		"extension": [
-			".ts",
-			".js"
-		],
-		"exclude": [
-			"**/*.d.ts"
-		]
+		"extension": [ ".ts", ".js" ],
+		"exclude": [ "**/*.d.ts" ]
 	},
 	"bin": {
 		"@passoa/tap": "./bin/tap.js"

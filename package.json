@@ -1,14 +1,15 @@
 {
 	"name": "@passoa/tap",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "index.js",
 	"repository": "git+https://github.com/pass0a/tap.git",
 	"scripts": {
+		"ncp": "ncp dist/src/index.js ./index.js && ncp dist/src/index.d.ts ./index.d.ts",
 		"nyc_out": "rimraf .nyc_output && mkdirp .nyc_output",
 		"pretest": "npm run nyc_out && nyc instrument test dist/test && nyc instrument src dist/src && tsc",
 		"test": "tape dist/test/*.test.js | tap-xunit > dist/TEST-tap.xml",
-		"posttest": "nyc report --reporter=text --reporter=html && ncp dist/src/index.js index.js"
+		"posttest": "nyc report --reporter=text --reporter=html && npm run ncp"
 	},
 	"author": "losper",
 	"license": "MIT",

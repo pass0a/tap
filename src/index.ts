@@ -11,10 +11,11 @@ declare global {
 
 test.onFinish(function() {
 	var val = JSON.stringify(global['__coverage__']);
-	fs.writeFile('.nyc_output/coverage.json', val ? val : '', function(err) {
-		if (err) {
-			console.log('write err:', err);
-		}
-	});
+	fs.writeFileSync('.nyc_output/coverage.json', val ? val : '');
+	// fs.writeFile('.nyc_output/coverage.json', val ? val : '', function(err) {
+	// if (err) {
+	// console.log('write err:', err);
+	// }
+	// });
 });
 export { test };
